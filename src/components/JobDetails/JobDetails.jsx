@@ -1,5 +1,9 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { saveJobApplication } from '../../utility/localstorage';
+
 
 const JobDetails = () => {
 
@@ -9,6 +13,10 @@ const JobDetails = () => {
 
     const { job_description, job_title, company_name, remote_or_onsite, job_type, salary, location, logo } = job;
 
+    const handleAppliedJobs = () =>{
+        saveJobApplication(parseInt(id));
+        toast("Applied Successfully!!!");
+    }
 
     return (
         <div>
@@ -21,9 +29,10 @@ const JobDetails = () => {
                     </div>
                     <div className="border relative h-auto">
                         <p>Side things</p>
-                        <button className='btn btn-primary w-full absolute bottom-0 left-0'>Apply Now</button>
+                        <button onClick={handleAppliedJobs} className='btn btn-primary w-full absolute bottom-0 left-0'>Apply Now</button>
                     </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };
